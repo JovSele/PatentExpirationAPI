@@ -36,5 +36,8 @@ overenie v novom terminali
 curl "http://localhost:8000/api/v1/status?patent=EP0683520"
 curl "http://localhost:8000/api/v1/status?patent=US5250534"
 
-* funkcny kod pre lens.org - v ramci celko projektu
+# Vyčisti cache pre EP0683520
+psql -U patent_user -d patent_db -c "DELETE FROM patent_cache WHERE patent_number = 'EP0683520';"
+
+* funkcny kod pre lens.org + EPO - v ramci celko projektu
 * funkcny len python kod pre overenie v EPO test_EPO.py - nutne zahrnut do projektu
