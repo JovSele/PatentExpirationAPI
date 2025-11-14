@@ -3,7 +3,7 @@ Pydantic schemas for request/response validation.
 """
 
 from pydantic import BaseModel, Field, validator
-from typing import List, Optional
+from typing import List, Optional, Dict
 from datetime import datetime
 import re
 
@@ -28,18 +28,14 @@ class PatentStatusRequest(BaseModel):
 
 
 class PatentStatusResponse(BaseModel):
-    """Unified response schema for patent status."""
-    patent: str = Field(..., description="Patent number")
-    status: str = Field(..., description="Patent status: 'active' or 'expired'")
-    expiry_date: Optional[str] = Field(None, description="Expiry date (ISO format)")
-    jurisdictions: Optional[List[str]] = Field(None, description="Active jurisdictions")
-    lapse_reason: Optional[str] = Field(None, description="Reason for lapse if expired")
-    source: str = Field(..., description="Data source: 'EPO' or 'USPTO'")
-    last_update: datetime = Field(..., description="Last cache update timestamp")
-    disclaimer: str = Field(
-        default="For informational purposes only. Not legal advice.",
-        description="Legal disclaimer"
-    )
+    patent_number: str
+    status: str
+    expiry_date: Optional[str]
+    jurisdictions: Optional[Dict[str, str]]  # ← ZMEŇ z List[str] na Dict[str, str]
+    lapse_reason: Optional[str]
+    source: str
+    last_fetched: Optional[str]
+    cache_hit: bool
     
     class Config:
         json_schema_extra = {

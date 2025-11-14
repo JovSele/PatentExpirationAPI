@@ -27,6 +27,11 @@ class Settings(BaseSettings):
     epo_consumer_key: str
     epo_consumer_secret: str
     epo_base_url: str = "https://ops.epo.org/3.2"
+
+    # Lens.org Patent API
+    lens_api_token: str
+    lens_base_url: str = "https://api.lens.org/patent/search"
+    lens_rate_limit_per_minute: int = 10
     
     # USPTO API
     uspto_api_key: str = ""

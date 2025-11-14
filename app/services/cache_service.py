@@ -4,7 +4,7 @@ Handles cache reads, writes, and TTL checks.
 """
 
 from typing import Optional, Dict, Any
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from sqlalchemy.orm import Session
 from app.models import PatentCache
 from app.config import settings
@@ -33,7 +33,7 @@ class CacheService:
             return None
         
         # Check if cache is stale (older than TTL)
-        ttl_threshold = datetime.now() - timedelta(days=settings.cache_ttl_days)
+        ttl_threshold = datetime.now(timezone.utc) - timedelta(days=settings.cache_ttl_days)
         
         if cache_entry.last_fetched < ttl_threshold:
             # Cache is stale, return None to trigger refresh
@@ -60,7 +60,7 @@ class CacheService:
         Returns:
             PatentCache object
         """
-        patent_number = patent_data["patent"]
+        patent_number = patent_data.get("patent_number") or patent_data.get("patent")
         
         # Check if already exists
         cache_entry = db.query(PatentCache).filter(
@@ -75,8 +75,8 @@ class CacheService:
             cache_entry.lapse_reason = patent_data.get("lapse_reason")
             cache_entry.source = patent_data.get("source")
             cache_entry.raw_data = patent_data.get("raw_data")
-            cache_entry.last_fetched = datetime.now()
-            cache_entry.updated_at = datetime.now()
+            cache_entry.last_fetched = datetime.now(timezone.utc)
+            cache_entry.updated_at = datetime.now(timezone.utc)
             cache_entry.fetch_count += 1
         else:
             # Create new entry
@@ -88,7 +88,7 @@ class CacheService:
                 lapse_reason=patent_data.get("lapse_reason"),
                 source=patent_data.get("source"),
                 raw_data=patent_data.get("raw_data"),
-                last_fetched=datetime.now(),
+                last_fetched=datetime.now(timezone.utc),
                 fetch_count=1
             )
             db.add(cache_entry)
@@ -127,7 +127,7 @@ class CacheService:
         Returns:
             List of PatentCache objects
         """
-        ttl_threshold = datetime.now() - timedelta(days=settings.cache_ttl_days)
+        ttl_threshold = datetime.now(timezone.utc) - timedelta(days=settings.cache_ttl_days)
         
         return db.query(PatentCache).filter(
             PatentCache.last_fetched < ttl_threshold

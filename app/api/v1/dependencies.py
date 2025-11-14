@@ -11,6 +11,7 @@ from app.services.epo_service import EPOService
 from app.services.uspto_service import USPTOService
 from app.services.cache_service import CacheService
 from app.config import settings
+from app.services.patent_service import PatentService
 
 
 def get_epo_service() -> EPOService:
@@ -46,3 +47,15 @@ def verify_rapidapi_secret(
         )
     
     return x_rapidapi_proxy_secret
+
+def get_patent_service(
+    epo_service: EPOService = Depends(get_epo_service),
+    uspto_service: USPTOService = Depends(get_uspto_service),
+    cache_service: CacheService = Depends(get_cache_service)
+) -> PatentService:
+    """Dependency to get unified patent service with multi-source support."""
+    return PatentService(
+        epo_service=epo_service,
+        uspto_service=uspto_service,
+        cache_service=cache_service
+    )

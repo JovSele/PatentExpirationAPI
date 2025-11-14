@@ -14,14 +14,8 @@ from app.schemas import (
     HealthCheckResponse
 )
 from app.database import get_db
-from app.services.epo_service import EPOService
-from app.services.uspto_service import USPTOService
-from app.services.cache_service import CacheService
-from app.api.v1.dependencies import (
-    get_epo_service,
-    get_uspto_service,
-    get_cache_service
-)
+from app.services.patent_service import PatentService
+from app.api.v1.dependencies import get_patent_service
 from app.utils.rate_limiter import rate_limiter
 from app.config import settings
 from app.models import RequestLog
@@ -55,15 +49,9 @@ router = APIRouter()
 )
 async def get_patent_status(
     request: Request,
-    patent: str = Query(
-        ...,
-        description="Patent number (e.g., EP1234567 or US7654321)",
-        example="EP1234567"
-    ),
+    patent: str = Query(...),
     db: Session = Depends(get_db),
-    epo_service: EPOService = Depends(get_epo_service),
-    uspto_service: USPTOService = Depends(get_uspto_service),
-    cache_service: CacheService = Depends(get_cache_service)
+    patent_service: PatentService = Depends(get_patent_service)
 ):
     """
     Get patent status with caching.
@@ -93,45 +81,21 @@ async def get_patent_status(
                 }
             )
         
-        # Check cache first
-        cached = cache_service.get_cached_patent(db, patent)
+        # Get patent status using unified service (handles cache, EPO, Lens, USPTO)
+        patent_data = await patent_service.get_patent_status(db, patent)
         
-        if cached:
-            # Cache hit
-            cache_hit = True
-            patent_data = {
-                "patent": cached.patent_number,
-                "status": cached.status,
-                "expiry_date": cached.expiry_date,
-                "jurisdictions": cached.jurisdictions,
-                "lapse_reason": cached.lapse_reason,
-                "source": cached.source,
-                "last_update": cached.last_fetched.isoformat()
-            }
-        else:
-            # Cache miss - fetch from API
-            if patent.startswith("EP"):
-                raw_data = await epo_service.get_patent_status(patent)
-            elif patent.startswith("US"):
-                raw_data = await uspto_service.get_patent_status(patent)
-            else:
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="Unsupported patent jurisdiction"
-                )
-            
-            # Save to cache
-            cached = cache_service.save_patent_to_cache(db, raw_data)
-            
-            patent_data = {
-                "patent": cached.patent_number,
-                "status": cached.status,
-                "expiry_date": cached.expiry_date,
-                "jurisdictions": cached.jurisdictions,
-                "lapse_reason": cached.lapse_reason,
-                "source": cached.source,
-                "last_update": cached.last_fetched.isoformat()
-            }
+        if not patent_data:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail={
+                    "error": "NotFound",
+                    "message": "Patent not found",
+                    "detail": f"Patent {patent} not found in any data source"
+                }
+            )
+        
+        # Extract cache hit info
+        cache_hit = patent_data.pop("cache_hit", False)
         
         # Log request
         response_time_ms = int((time.time() - start_time) * 1000)
@@ -146,13 +110,14 @@ async def get_patent_status(
         
         # Build response
         response = PatentStatusResponse(
-            patent=patent_data["patent"],
+            patent_number=patent_data["patent_number"],
             status=patent_data["status"],
-            expiry_date=patent_data["expiry_date"],
-            jurisdictions=patent_data["jurisdictions"],
-            lapse_reason=patent_data["lapse_reason"],
+            expiry_date=patent_data.get("expiry_date"),
+            jurisdictions=patent_data.get("jurisdictions"),
+            lapse_reason=patent_data.get("lapse_reason"),
             source=patent_data["source"],
-            last_update=patent_data["last_update"]
+            last_fetched=patent_data.get("last_fetched", datetime.now().isoformat()),
+            cache_hit=cache_hit
         )
         
         return response
