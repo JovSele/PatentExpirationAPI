@@ -1,0 +1,1310 @@
+{
+  "ops:world-patent-data": {
+    "@xmlns": {
+      "ops": "http://ops.epo.org",
+      "$": "http://www.epo.org/exchange",
+      "xlink": "http://www.w3.org/1999/xlink"
+    },
+    "exchange-documents": {
+      "exchange-document": [
+        {
+          "@system": "ops.epo.org",
+          "@family-id": "6518115",
+          "@country": "EP",
+          "@doc-number": "0683520",
+          "@kind": "A2",
+          "bibliographic-data": {
+            "publication-reference": {
+              "document-id": [
+                {
+                  "@document-id-type": "docdb",
+                  "country": {
+                    "$": "EP"
+                  },
+                  "doc-number": {
+                    "$": "0683520"
+                  },
+                  "kind": {
+                    "$": "A2"
+                  },
+                  "date": {
+                    "$": "19951122"
+                  }
+                },
+                {
+                  "@document-id-type": "epodoc",
+                  "doc-number": {
+                    "$": "EP0683520"
+                  },
+                  "date": {
+                    "$": "19951122"
+                  }
+                }
+              ]
+            },
+            "classification-ipc": {
+              "text": {
+                "$": "H01L23/66"
+              }
+            },
+            "classifications-ipcr": {
+              "classification-ipcr": [
+                {
+                  "@sequence": "1",
+                  "text": {
+                    "$": "H01L  23/   482            A I"
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "text": {
+                    "$": "H01L  23/    66            A I"
+                  }
+                }
+              ]
+            },
+            "patent-classifications": {
+              "patent-classification": [
+                {
+                  "@sequence": "1",
+                  "classification-scheme": {
+                    "@office": "EP",
+                    "@scheme": "CPCI"
+                  },
+                  "section": {
+                    "$": "H"
+                  },
+                  "class": {
+                    "$": "01"
+                  },
+                  "subclass": {
+                    "$": "L"
+                  },
+                  "main-group": {
+                    "$": "23"
+                  },
+                  "subgroup": {
+                    "$": "66"
+                  },
+                  "classification-value": {
+                    "$": "I"
+                  },
+                  "generating-office": {
+                    "$": "EP"
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "classification-scheme": {
+                    "@office": "EP",
+                    "@scheme": "CPCI"
+                  },
+                  "section": {
+                    "$": "H"
+                  },
+                  "class": {
+                    "$": "01"
+                  },
+                  "subclass": {
+                    "$": "L"
+                  },
+                  "main-group": {
+                    "$": "2924"
+                  },
+                  "subgroup": {
+                    "$": "0002"
+                  },
+                  "classification-value": {
+                    "$": "A"
+                  },
+                  "generating-office": {
+                    "$": "EP"
+                  }
+                }
+              ]
+            },
+            "application-reference": {
+              "@doc-id": "17093428",
+              "document-id": [
+                {
+                  "@document-id-type": "docdb",
+                  "country": {
+                    "$": "EP"
+                  },
+                  "doc-number": {
+                    "$": "95106296"
+                  },
+                  "kind": {
+                    "$": "A"
+                  }
+                },
+                {
+                  "@document-id-type": "epodoc",
+                  "doc-number": {
+                    "$": "EP19950106296"
+                  },
+                  "date": {
+                    "$": "19950427"
+                  }
+                },
+                {
+                  "@document-id-type": "original",
+                  "doc-number": {
+                    "$": "95106296"
+                  }
+                }
+              ]
+            },
+            "priority-claims": {
+              "priority-claim": {
+                "@sequence": "1",
+                "@kind": "national",
+                "document-id": [
+                  {
+                    "@document-id-type": "epodoc",
+                    "doc-number": {
+                      "$": "DE19944416980"
+                    },
+                    "date": {
+                      "$": "19940513"
+                    }
+                  },
+                  {
+                    "@document-id-type": "original",
+                    "doc-number": {
+                      "$": "4416980"
+                    }
+                  }
+                ]
+              }
+            },
+            "parties": {
+              "applicants": {
+                "applicant": [
+                  {
+                    "@sequence": "1",
+                    "@data-format": "epodoc",
+                    "applicant-name": {
+                      "name": {
+                        "$": "ANT NACHRICHTENTECH [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "1",
+                    "@data-format": "original",
+                    "applicant-name": {
+                      "name": {
+                        "$": "ANT NACHRICHTENTECHNIK GMBH,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "2",
+                    "@data-format": "original",
+                    "applicant-name": {
+                      "name": {
+                        "$": "ROBERT BOSCH GMBH"
+                      }
+                    }
+                  }
+                ]
+              },
+              "inventors": {
+                "inventor": [
+                  {
+                    "@sequence": "1",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "BISCHOF WERNER DR [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "2",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "KUKE ALBRECHT DR [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "3",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "HAUER HEINER [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "4",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "SCHOLZ WERNER [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "1",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "BISCHOF, WERNER, DR,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "2",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "KUKE, ALBRECHT, DR,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "3",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "HAUER, HEINER,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "4",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "SCHOLZ, WERNER"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "invention-title": [
+              {
+                "$": "Verfahren zur Herstellung einer Anordnung zur Kontaktierung von planaren Hochfrequenzleitungen und Anordnung zur Kontaktierung von planaren Hochfrequenzleitungen.",
+                "@lang": "de"
+              },
+              {
+                "$": "Procédé de fabrication d'un dispositif de contact pour conducteurs planaires de haute fréquence et dispositif de contact pour conducteurs planaires de haute fréquence.",
+                "@lang": "fr"
+              },
+              {
+                "$": "Method for making a contact device for planar high frequency leads and contact device for planar high frequency leads.",
+                "@lang": "en"
+              }
+            ]
+          },
+          "abstract": [
+            {
+              "@lang": "en",
+              "p": {
+                "$": "A process for producing an appts. for contacting planar high frequency conductors with electronic components comprises: (a) forming a passivation layer (4,5) on the upper side (2) and under side (3) of a substrate (1); (b) opening a window (6) in the under passivation layer (5), and etching a recess (7) from the under side (3) into the substrate (1), the recess (7) extending to the passivation layer (4) on the upper side (2) or up to an etch stop layer on the upper side (2); (c) forming a metal layer (8), a dielectric layer (9) and a further metal layer (10) on the upper side (2) on top of the passivation layer (4); (d) structuring the metal layer (10) to form a planar conducting pattern, whereby in the area of the recess (7) at least one conductor ends over the recess or covers this; (e) structuring the lower metal layer (8) corresp. to the upper metal layer (10) before forming the dielectric layer (9) in the area of the recess (7); and (f) sepg. or sawing, or sawing and sepg. the substrate in such a way that self-supporting tongues each having a conductor end are formed through the recesses. Also claimed is (1) a process in which (a)-(c) are the same in which: (d) the conductor ends over the recess (7); (e) the lower metal layer (8) is structured corresp. to the upper metal layer (10) in the area of the recess (7); and (f) the dielectric layer (9) and the passivation layer (4) or the dielectric layer (9), the passivation layer (4) and a residual thin substrate layer above the etch stop layer (20) are structured in the area of the recess in such a way that the conductor ends above the recess consist of self-supporting tongues at least with metal layer (8), dielectric layer (9) and metal layer (10); and (2) the appts. for contacting planar high frequency conductors with electronic components. &lt;IMAGE&gt;"
+              }
+            },
+            {
+              "@lang": "de",
+              "p": {
+                "$": "Auf die Oberseite (2) und die Unterseite (3) eines Substrates (1) wird je eine Passivierungsschicht (4, 5) aufgebracht. In der unteren Passivierungsschicht (5) wird ein Fenster (6) geöffnet und eine Vertiefung (7) von der Unterseite (3) ins Substrat (1) geätzt, die bis zur Passivierungsschicht (4) auf der Oberseite (2) oder bis zu einer Ätzstopschicht (20) an der Oberseite (2) reicht. Auf der Oberseite (2) werden über die Passivierungsschicht (4) eine Metallschicht (8), eine Dielektrikumschicht (9) und eine weitere Metallschicht (10) aufgebracht. Die obere Metallschicht (10) wird zur Erzeugung von planaren Leitermustern strukturiert, wobei im Bereich der Vertiefung (7) zumindest ein Leiter vorgesehen ist, der über der Vertiefung endet oder diese überspannt Die untere Metallschicht (8) wird vor dem Aufbringen der Dielektrikumsschicht (9) im Bereich der Vertiefung (7) entsprechend der oberen Metallschicht (10) strukturiert Das Substrat wird derart zersägt oder vereinzelt oder zersägt und vereinzelt, daß über die Vertiefung freitragende Zungen mit jeweils zumindest einem Leiterende entstehen. &lt;IMAGE&gt;"
+              }
+            }
+          ]
+        },
+        {
+          "@system": "ops.epo.org",
+          "@family-id": "6518115",
+          "@country": "EP",
+          "@doc-number": "0683520",
+          "@kind": "A3",
+          "bibliographic-data": {
+            "publication-reference": {
+              "document-id": [
+                {
+                  "@document-id-type": "docdb",
+                  "country": {
+                    "$": "EP"
+                  },
+                  "doc-number": {
+                    "$": "0683520"
+                  },
+                  "kind": {
+                    "$": "A3"
+                  },
+                  "date": {
+                    "$": "19980225"
+                  }
+                },
+                {
+                  "@document-id-type": "epodoc",
+                  "doc-number": {
+                    "$": "EP0683520"
+                  },
+                  "date": {
+                    "$": "19980225"
+                  }
+                }
+              ]
+            },
+            "classification-ipc": {
+              "text": {
+                "$": "H01L23/66"
+              }
+            },
+            "classifications-ipcr": {
+              "classification-ipcr": [
+                {
+                  "@sequence": "1",
+                  "text": {
+                    "$": "H01L  23/   482            A I"
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "text": {
+                    "$": "H01L  23/    66            A I"
+                  }
+                }
+              ]
+            },
+            "patent-classifications": {
+              "patent-classification": [
+                {
+                  "@sequence": "1",
+                  "classification-scheme": {
+                    "@office": "EP",
+                    "@scheme": "CPCI"
+                  },
+                  "section": {
+                    "$": "H"
+                  },
+                  "class": {
+                    "$": "01"
+                  },
+                  "subclass": {
+                    "$": "L"
+                  },
+                  "main-group": {
+                    "$": "23"
+                  },
+                  "subgroup": {
+                    "$": "66"
+                  },
+                  "classification-value": {
+                    "$": "I"
+                  },
+                  "generating-office": {
+                    "$": "EP"
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "classification-scheme": {
+                    "@office": "EP",
+                    "@scheme": "CPCI"
+                  },
+                  "section": {
+                    "$": "H"
+                  },
+                  "class": {
+                    "$": "01"
+                  },
+                  "subclass": {
+                    "$": "L"
+                  },
+                  "main-group": {
+                    "$": "2924"
+                  },
+                  "subgroup": {
+                    "$": "0002"
+                  },
+                  "classification-value": {
+                    "$": "A"
+                  },
+                  "generating-office": {
+                    "$": "EP"
+                  }
+                }
+              ]
+            },
+            "application-reference": {
+              "@doc-id": "17093428",
+              "document-id": [
+                {
+                  "@document-id-type": "docdb",
+                  "country": {
+                    "$": "EP"
+                  },
+                  "doc-number": {
+                    "$": "95106296"
+                  },
+                  "kind": {
+                    "$": "A"
+                  }
+                },
+                {
+                  "@document-id-type": "epodoc",
+                  "doc-number": {
+                    "$": "EP19950106296"
+                  },
+                  "date": {
+                    "$": "19950427"
+                  }
+                },
+                {
+                  "@document-id-type": "original",
+                  "doc-number": {
+                    "$": "95106296"
+                  }
+                }
+              ]
+            },
+            "priority-claims": {
+              "priority-claim": {
+                "@sequence": "1",
+                "@kind": "national",
+                "document-id": [
+                  {
+                    "@document-id-type": "epodoc",
+                    "doc-number": {
+                      "$": "DE19944416980"
+                    },
+                    "date": {
+                      "$": "19940513"
+                    }
+                  },
+                  {
+                    "@document-id-type": "original",
+                    "doc-number": {
+                      "$": "4416980"
+                    }
+                  }
+                ]
+              }
+            },
+            "parties": {
+              "applicants": {
+                "applicant": [
+                  {
+                    "@sequence": "1",
+                    "@data-format": "epodoc",
+                    "applicant-name": {
+                      "name": {
+                        "$": "ANT NACHRICHTENTECH [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "1",
+                    "@data-format": "original",
+                    "applicant-name": {
+                      "name": {
+                        "$": "ANT NACHRICHTENTECHNIK GMBH,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "2",
+                    "@data-format": "original",
+                    "applicant-name": {
+                      "name": {
+                        "$": "ROBERT BOSCH GMBH"
+                      }
+                    }
+                  }
+                ]
+              },
+              "inventors": {
+                "inventor": [
+                  {
+                    "@sequence": "1",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "BISCHOF WERNER DR [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "2",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "KUKE ALBRECHT DR [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "3",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "HAUER HEINER [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "4",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "SCHOLZ WERNER [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "1",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "BISCHOF, WERNER, DR,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "2",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "KUKE, ALBRECHT, DR,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "3",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "HAUER, HEINER,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "4",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "SCHOLZ, WERNER"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "invention-title": [
+              {
+                "$": "Verfahren zur Herstellung einer Anordnung zur Kontaktierung von planaren Hochfrequenzleitungen und Anordnung zur Kontaktierung von planaren Hochfrequenzleitungen.",
+                "@lang": "de"
+              },
+              {
+                "$": "Procédé de fabrication d'un dispositif de contact pour conducteurs planaires de haute fréquence et dispositif de contact pour conducteurs planaires de haute fréquence.",
+                "@lang": "fr"
+              },
+              {
+                "$": "Method for making a contact device for planar high frequency leads and contact device for planar high frequency leads.",
+                "@lang": "en"
+              }
+            ],
+            "references-cited": {
+              "citation": [
+                {
+                  "@cited-phase": "national-search-report",
+                  "@cited-by": "examiner",
+                  "@sequence": "1",
+                  "patcit": {
+                    "@dnum-type": "publication number",
+                    "@num": "1",
+                    "document-id": [
+                      {
+                        "@document-id-type": "epodoc",
+                        "doc-number": {
+                          "$": "JPS58115842"
+                        }
+                      },
+                      {
+                        "@document-id-type": "docdb",
+                        "country": {
+                          "$": "JP"
+                        },
+                        "doc-number": {
+                          "$": "S58115842"
+                        },
+                        "kind": {
+                          "$": "A"
+                        }
+                      }
+                    ]
+                  },
+                  "category": {
+                    "$": "A"
+                  }
+                },
+                {
+                  "@cited-phase": "national-search-report",
+                  "@cited-by": "examiner",
+                  "@sequence": "2",
+                  "patcit": {
+                    "@dnum-type": "publication number",
+                    "@num": "2",
+                    "document-id": [
+                      {
+                        "@document-id-type": "epodoc",
+                        "doc-number": {
+                          "$": "US3747202"
+                        },
+                        "name": {
+                          "$": "JORDAN J"
+                        },
+                        "date": {
+                          "$": "19730724"
+                        }
+                      },
+                      {
+                        "@document-id-type": "docdb",
+                        "country": {
+                          "$": "US"
+                        },
+                        "doc-number": {
+                          "$": "3747202"
+                        },
+                        "kind": {
+                          "$": "A"
+                        },
+                        "name": {
+                          "$": "JORDAN J"
+                        },
+                        "date": {
+                          "$": "19730724"
+                        }
+                      }
+                    ]
+                  },
+                  "category": {
+                    "$": "Y"
+                  },
+                  "rel-claims": {
+                    "$": "1"
+                  },
+                  "rel-passage": {
+                    "passage": {
+                      "$": "* claims 1,2 *"
+                    }
+                  }
+                },
+                {
+                  "@cited-phase": "national-search-report",
+                  "@cited-by": "examiner",
+                  "@sequence": "3",
+                  "patcit": {
+                    "@dnum-type": "publication number",
+                    "@num": "3",
+                    "document-id": [
+                      {
+                        "@document-id-type": "epodoc",
+                        "doc-number": {
+                          "$": "DE2810054"
+                        },
+                        "name": {
+                          "$": "MATSUSHITA ELECTRIC INDUSTRIAL CO LTD"
+                        },
+                        "date": {
+                          "$": "19780914"
+                        }
+                      },
+                      {
+                        "@document-id-type": "docdb",
+                        "country": {
+                          "$": "DE"
+                        },
+                        "doc-number": {
+                          "$": "2810054"
+                        },
+                        "kind": {
+                          "$": "A1"
+                        },
+                        "name": {
+                          "$": "MATSUSHITA ELECTRIC INDUSTRIAL CO LTD"
+                        },
+                        "date": {
+                          "$": "19780914"
+                        }
+                      }
+                    ]
+                  },
+                  "category": [
+                    {
+                      "$": "Y"
+                    },
+                    {
+                      "$": "A"
+                    }
+                  ],
+                  "rel-claims": [
+                    {
+                      "$": "1"
+                    },
+                    {
+                      "$": "5"
+                    }
+                  ],
+                  "rel-passage": {
+                    "passage": {
+                      "$": "* figures 5,7; claims 1,24 *"
+                    }
+                  }
+                },
+                {
+                  "@cited-phase": "national-search-report",
+                  "@cited-by": "examiner",
+                  "@sequence": "4",
+                  "patcit": {
+                    "@dnum-type": "publication number",
+                    "@num": "4",
+                    "document-id": [
+                      {
+                        "@document-id-type": "epodoc",
+                        "doc-number": {
+                          "$": "EP0001707"
+                        },
+                        "name": {
+                          "$": "FLUKE MFG CO JOHN [US]"
+                        },
+                        "date": {
+                          "$": "19790502"
+                        }
+                      },
+                      {
+                        "@document-id-type": "docdb",
+                        "country": {
+                          "$": "EP"
+                        },
+                        "doc-number": {
+                          "$": "0001707"
+                        },
+                        "kind": {
+                          "$": "A1"
+                        },
+                        "name": {
+                          "$": "FLUKE MFG CO JOHN [US]"
+                        },
+                        "date": {
+                          "$": "19790502"
+                        }
+                      }
+                    ]
+                  },
+                  "category": {
+                    "$": "A"
+                  },
+                  "rel-claims": {
+                    "$": "5"
+                  },
+                  "rel-passage": {
+                    "passage": {
+                      "$": "* page  17, line  20  - line  32; figure 7 *"
+                    }
+                  }
+                },
+                {
+                  "@cited-phase": "national-search-report",
+                  "@cited-by": "examiner",
+                  "@sequence": "5",
+                  "patcit": {
+                    "@dnum-type": "publication number",
+                    "@num": "5",
+                    "document-id": [
+                      {
+                        "@document-id-type": "epodoc",
+                        "doc-number": {
+                          "$": "US4189342"
+                        },
+                        "name": {
+                          "$": "KOCK HENDRIKUS G [NL]"
+                        },
+                        "date": {
+                          "$": "19800219"
+                        }
+                      },
+                      {
+                        "@document-id-type": "docdb",
+                        "country": {
+                          "$": "US"
+                        },
+                        "doc-number": {
+                          "$": "4189342"
+                        },
+                        "kind": {
+                          "$": "A"
+                        },
+                        "name": {
+                          "$": "KOCK HENDRIKUS G [NL]"
+                        },
+                        "date": {
+                          "$": "19800219"
+                        }
+                      }
+                    ]
+                  },
+                  "category": {
+                    "$": "A"
+                  },
+                  "rel-claims": {
+                    "$": "1,5"
+                  },
+                  "rel-passage": {
+                    "passage": {
+                      "$": "* column  9, line  7  - line  42; figure 9 *"
+                    }
+                  }
+                },
+                {
+                  "@cited-phase": "national-search-report",
+                  "@cited-by": "examiner",
+                  "@sequence": "6",
+                  "patcit": {
+                    "@dnum-type": "publication number",
+                    "@num": "6",
+                    "document-id": [
+                      {
+                        "@document-id-type": "epodoc",
+                        "doc-number": {
+                          "$": "FR2565030"
+                        },
+                        "name": {
+                          "$": "THOMSON CSF [FR]"
+                        },
+                        "date": {
+                          "$": "19851129"
+                        }
+                      },
+                      {
+                        "@document-id-type": "docdb",
+                        "country": {
+                          "$": "FR"
+                        },
+                        "doc-number": {
+                          "$": "2565030"
+                        },
+                        "kind": {
+                          "$": "A1"
+                        },
+                        "name": {
+                          "$": "THOMSON CSF [FR]"
+                        },
+                        "date": {
+                          "$": "19851129"
+                        }
+                      }
+                    ]
+                  },
+                  "category": {
+                    "$": "A"
+                  },
+                  "rel-claims": {
+                    "$": "1,5"
+                  },
+                  "rel-passage": {
+                    "passage": {
+                      "$": "* page  7, line  19  - page  9, line  2; figure 4 *"
+                    }
+                  }
+                },
+                {
+                  "@cited-phase": "national-search-report",
+                  "@cited-by": "examiner",
+                  "@sequence": "7",
+                  "patcit": {
+                    "@dnum-type": "publication number",
+                    "@num": "7",
+                    "document-id": [
+                      {
+                        "@document-id-type": "epodoc",
+                        "doc-number": {
+                          "$": "DE3930621"
+                        },
+                        "name": {
+                          "$": "MITSUBISHI ELECTRIC CORP [JP]"
+                        },
+                        "date": {
+                          "$": "19900322"
+                        }
+                      },
+                      {
+                        "@document-id-type": "docdb",
+                        "country": {
+                          "$": "DE"
+                        },
+                        "doc-number": {
+                          "$": "3930621"
+                        },
+                        "kind": {
+                          "$": "A1"
+                        },
+                        "name": {
+                          "$": "MITSUBISHI ELECTRIC CORP [JP]"
+                        },
+                        "date": {
+                          "$": "19900322"
+                        }
+                      }
+                    ]
+                  },
+                  "category": [
+                    {
+                      "$": "D"
+                    },
+                    {
+                      "$": "A"
+                    }
+                  ],
+                  "rel-claims": [
+                    {
+                      "$": "1,5"
+                    },
+                    {
+                      "$": "1,5"
+                    }
+                  ],
+                  "rel-passage": {
+                    "passage": {
+                      "$": "* figures 8,9A-9E *"
+                    }
+                  }
+                },
+                {
+                  "@cited-phase": "national-search-report",
+                  "@cited-by": "examiner",
+                  "@sequence": "8",
+                  "nplcit": {
+                    "@num": "1",
+                    "text": {
+                      "$": "- PATENT ABSTRACTS OF JAPAN, (19831007), vol. 007, no. 226, Database accession no. (E - 202), \n& JP58115842 A 19830709 (FUJITSU KK)"
+                    }
+                  },
+                  "category": {
+                    "$": "A"
+                  },
+                  "rel-claims": {
+                    "$": "5"
+                  },
+                  "rel-passage": {
+                    "passage": {
+                      "$": "* abstract *"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "@system": "ops.epo.org",
+          "@family-id": "6518115",
+          "@country": "EP",
+          "@doc-number": "0683520",
+          "@kind": "B1",
+          "bibliographic-data": {
+            "publication-reference": {
+              "document-id": [
+                {
+                  "@document-id-type": "docdb",
+                  "country": {
+                    "$": "EP"
+                  },
+                  "doc-number": {
+                    "$": "0683520"
+                  },
+                  "kind": {
+                    "$": "B1"
+                  },
+                  "date": {
+                    "$": "20011205"
+                  }
+                },
+                {
+                  "@document-id-type": "epodoc",
+                  "doc-number": {
+                    "$": "EP0683520"
+                  },
+                  "date": {
+                    "$": "20011205"
+                  }
+                }
+              ]
+            },
+            "classification-ipc": {
+              "text": [
+                {
+                  "$": "H01L23/66"
+                },
+                {
+                  "$": "H01L23/482"
+                }
+              ]
+            },
+            "classifications-ipcr": {
+              "classification-ipcr": [
+                {
+                  "@sequence": "1",
+                  "text": {
+                    "$": "H01L  23/   482            A I"
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "text": {
+                    "$": "H01L  23/    66            A I"
+                  }
+                }
+              ]
+            },
+            "patent-classifications": {
+              "patent-classification": [
+                {
+                  "@sequence": "1",
+                  "classification-scheme": {
+                    "@office": "EP",
+                    "@scheme": "CPCI"
+                  },
+                  "section": {
+                    "$": "H"
+                  },
+                  "class": {
+                    "$": "01"
+                  },
+                  "subclass": {
+                    "$": "L"
+                  },
+                  "main-group": {
+                    "$": "23"
+                  },
+                  "subgroup": {
+                    "$": "66"
+                  },
+                  "classification-value": {
+                    "$": "I"
+                  },
+                  "generating-office": {
+                    "$": "EP"
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "classification-scheme": {
+                    "@office": "EP",
+                    "@scheme": "CPCI"
+                  },
+                  "section": {
+                    "$": "H"
+                  },
+                  "class": {
+                    "$": "01"
+                  },
+                  "subclass": {
+                    "$": "L"
+                  },
+                  "main-group": {
+                    "$": "2924"
+                  },
+                  "subgroup": {
+                    "$": "0002"
+                  },
+                  "classification-value": {
+                    "$": "A"
+                  },
+                  "generating-office": {
+                    "$": "EP"
+                  }
+                }
+              ]
+            },
+            "application-reference": {
+              "@doc-id": "17093428",
+              "document-id": [
+                {
+                  "@document-id-type": "docdb",
+                  "country": {
+                    "$": "EP"
+                  },
+                  "doc-number": {
+                    "$": "95106296"
+                  },
+                  "kind": {
+                    "$": "A"
+                  }
+                },
+                {
+                  "@document-id-type": "epodoc",
+                  "doc-number": {
+                    "$": "EP19950106296"
+                  },
+                  "date": {
+                    "$": "19950427"
+                  }
+                },
+                {
+                  "@document-id-type": "original",
+                  "doc-number": {
+                    "$": "95106296"
+                  }
+                }
+              ]
+            },
+            "priority-claims": {
+              "priority-claim": {
+                "@sequence": "1",
+                "@kind": "national",
+                "document-id": [
+                  {
+                    "@document-id-type": "epodoc",
+                    "doc-number": {
+                      "$": "DE19944416980"
+                    },
+                    "date": {
+                      "$": "19940513"
+                    }
+                  },
+                  {
+                    "@document-id-type": "original",
+                    "doc-number": {
+                      "$": "4416980"
+                    }
+                  }
+                ]
+              }
+            },
+            "parties": {
+              "applicants": {
+                "applicant": [
+                  {
+                    "@sequence": "1",
+                    "@data-format": "epodoc",
+                    "applicant-name": {
+                      "name": {
+                        "$": "BOSCH GMBH ROBERT [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "1",
+                    "@data-format": "original",
+                    "applicant-name": {
+                      "name": {
+                        "$": "ANT NACHRICHTENTECHNIK GMBH,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "2",
+                    "@data-format": "original",
+                    "applicant-name": {
+                      "name": {
+                        "$": "ROBERT BOSCH GMBH"
+                      }
+                    }
+                  }
+                ]
+              },
+              "inventors": {
+                "inventor": [
+                  {
+                    "@sequence": "1",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "BISCHOF WERNER DR [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "2",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "KUKE ALBRECHT DR [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "3",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "HAUER HEINER [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "4",
+                    "@data-format": "epodoc",
+                    "inventor-name": {
+                      "name": {
+                        "$": "SCHOLZ WERNER [DE]"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "1",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "BISCHOF, WERNER, DR,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "2",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "KUKE, ALBRECHT, DR,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "3",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "HAUER, HEINER,"
+                      }
+                    }
+                  },
+                  {
+                    "@sequence": "4",
+                    "@data-format": "original",
+                    "inventor-name": {
+                      "name": {
+                        "$": "SCHOLZ, WERNER"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "invention-title": [
+              {
+                "$": "Verfahren zur Herstellung einer Anordnung zur Kontaktierung von planaren Hochfrequenzleitungen und Anordnung zur Kontaktierung von planaren Hochfrequenzleitungen",
+                "@lang": "de"
+              },
+              {
+                "$": "Procédé de fabrication d'un dispositif de contact pour conducteurs planaires de haute fréquence et dispositif de contact pour conducteurs planaires de haute fréquence",
+                "@lang": "fr"
+              },
+              {
+                "$": "Method for making a contact device for planar high frequency leads and contact device for planar high frequency leads",
+                "@lang": "en"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
