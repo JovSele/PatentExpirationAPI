@@ -1,12 +1,20 @@
 """
 API endpoints for patent status lookup.
 """
+from app.exceptions import (
+    PatentNotFoundException,
+    InvalidPatentFormatException,
+    PatentAPIException
+)
 
 from fastapi import APIRouter, Depends, Query, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from typing import Optional
 from datetime import datetime
 import time
+import logging
+
+logger = logging.getLogger(__name__)
 
 from app.schemas import (
     PatentStatusResponse,
@@ -72,27 +80,13 @@ async def get_patent_status(
         
         # Validate format
         if not patent.startswith(("EP", "US")):
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail={
-                    "error": "ValidationError",
-                    "message": "Invalid patent format",
-                    "detail": "Expected format: EP1234567 or US7654321"
-                }
-            )
+            raise InvalidPatentFormatException(patent)
         
-        # Get patent status using unified service (handles cache, EPO, Lens, USPTO)
+        # Get patent status
         patent_data = await patent_service.get_patent_status(db, patent)
-        
+            
         if not patent_data:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail={
-                    "error": "NotFound",
-                    "message": "Patent not found",
-                    "detail": f"Patent {patent} not found in any data source"
-                }
-            )
+            raise PatentNotFoundException(patent)
         
         # Extract cache hit info
         cache_hit = patent_data.pop("cache_hit", False)
@@ -122,10 +116,12 @@ async def get_patent_status(
         
         return response
         
-    except HTTPException:
+    except PatentAPIException:
+        # Re-raise our custom exceptions
         raise
     except Exception as e:
-        # Log error
+        # Log unexpected errors
+        logger.exception(f"Unexpected error for {patent}: {str(e)}")
         response_time_ms = int((time.time() - start_time) * 1000)
         _log_request(
             db=db,
@@ -136,13 +132,11 @@ async def get_patent_status(
             cache_hit=False
         )
         
-        raise HTTPException(
+        raise PatentAPIException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={
-                "error": "InternalServerError",
-                "message": "Failed to retrieve patent status",
-                "detail": str(e) if settings.debug else "Please try again later"
-            }
+            error="InternalServerError",
+            message="Failed to retrieve patent status",
+            detail=str(e) if settings.debug else "Please try again later"
         )
 
 

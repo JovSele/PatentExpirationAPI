@@ -10,22 +10,19 @@ import time
 
 from app.config import settings
 from app.database import init_db
-from app.api.v1 import endpoints
+from app.api.v1 import endpoints, analytics
+from app.middleware.advanced_rate_limiter import api_key_rate_limiter
+from app.exceptions import RateLimitExceededException
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """
-    Application lifespan events.
-    Initialize database on startup.
-    """
+    """Application lifespan events."""
     # Startup
     print("🚀 Starting Patent Expiration API...")
     init_db()
     print("✅ Database initialized")
-    
     yield
-    
     # Shutdown
     print("👋 Shutting down Patent Expiration API...")
 
@@ -40,7 +37,6 @@ app = FastAPI(
     - ✅ Single patent lookup (EP, US)
     - ✅ Status: active/expired
     - ✅ Expiry date & jurisdictions
-    - ✅ Lapse reason tracking
     - ✅ 30-day cache (fast responses)
     - ✅ Rate limiting by tier
     
@@ -50,18 +46,15 @@ app = FastAPI(
     
     ## Rate Limits
     - **Free:** 20 requests/month
-    - **Basic:** 1,000 requests/month (€19)
-    - **Pro:** 10,000 requests/month (€99)
-    
-    ## Legal Disclaimer
-    ⚠️ This API provides information **for informational purposes only**.
-    Not legal advice. Always verify critical information with official patent offices.
+    - **Basic:** 1,000 requests/month
+    - **Pro:** 10,000 requests/month
     """,
     version=settings.app_version,
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan
 )
+
 
 # CORS middleware
 app.add_middleware(
@@ -73,21 +66,41 @@ app.add_middleware(
 )
 
 
-# Middleware for adding rate limit headers to response
+# Rate limit middleware
 @app.middleware("http")
-async def add_rate_limit_headers(request: Request, call_next):
-    """Add rate limit info to response headers."""
+async def rate_limit_middleware(request: Request, call_next):
+    # Skip for health check and analytics
+    if request.url.path in ["/api/v1/health", "/", "/docs", "/redoc", "/openapi.json"]:
+        return await call_next(request)
+    
+    # Check rate limit
+    try:
+        await api_key_rate_limiter.check_rate_limit(request)
+    except RateLimitExceededException as e:
+        return JSONResponse(
+            status_code=e.status_code,
+            content=e.detail,
+            headers={
+                "X-RateLimit-Limit": str(request.state.rate_limit_info["limit"]),
+                "X-RateLimit-Remaining": "0",
+                "X-RateLimit-Reset": request.state.rate_limit_info["reset"]
+            }
+        )
+    
+    # Process request
     response = await call_next(request)
     
-    # Add rate limit headers if available
-    if hasattr(request.state, "rate_limit_remaining"):
-        response.headers["X-RateLimit-Remaining"] = str(request.state.rate_limit_remaining)
-        response.headers["X-RateLimit-Limit"] = str(request.state.rate_limit_limit)
+    # Add rate limit headers
+    if hasattr(request.state, "rate_limit_info"):
+        info = request.state.rate_limit_info
+        response.headers["X-RateLimit-Limit"] = str(info["limit"])
+        response.headers["X-RateLimit-Remaining"] = str(info["remaining"])
+        response.headers["X-RateLimit-Reset"] = info["reset"]
     
     return response
 
 
-# Middleware for request timing
+# Request timing middleware
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
     """Add processing time to response headers."""
@@ -101,7 +114,6 @@ async def add_process_time_header(request: Request, call_next):
 # Exception handlers
 @app.exception_handler(404)
 async def not_found_handler(request: Request, exc):
-    """Custom 404 handler."""
     return JSONResponse(
         status_code=404,
         content={
@@ -112,89 +124,26 @@ async def not_found_handler(request: Request, exc):
     )
 
 
-@app.exception_handler(500)
-async def internal_error_handler(request: Request, exc):
-    """Custom 500 handler."""
-    return JSONResponse(
-        status_code=500,
-        content={
-            "error": "InternalServerError",
-            "message": "An unexpected error occurred",
-            "detail": str(exc) if settings.debug else "Please try again later"
-        }
-    )
-
-
 # Include routers
-app.include_router(
-    endpoints.router,
-    prefix="/api/v1",
-    tags=["Patents"]
-)
+app.include_router(endpoints.router, prefix="/api/v1", tags=["Patents"])
+app.include_router(analytics.router, prefix="/api/v1", tags=["Analytics"])
 
 
 # Root endpoint
 @app.get("/", tags=["Root"])
 async def root():
-    """
-    Root endpoint with API info.
-    """
     return {
         "name": settings.app_name,
         "version": settings.app_version,
         "status": "operational",
         "documentation": "/docs",
-        "health_check": "/api/v1/health",
         "endpoints": {
-            "patent_status": "/api/v1/status?patent=EP1234567"
-        },
-        "legal_disclaimer": "For informational purposes only. Not legal advice."
-    }
-
-
-# Legal disclaimer endpoint
-@app.get("/disclaimer", tags=["Legal"])
-async def legal_disclaimer():
-    """
-    Legal disclaimer and terms of use.
-    """
-    return {
-        "disclaimer": """
-        LEGAL DISCLAIMER
-        
-        This API provides patent status information FOR INFORMATIONAL PURPOSES ONLY.
-        
-        NO WARRANTY:
-        - Information is provided "as is" without warranty of any kind
-        - We do not guarantee accuracy, completeness, or timeliness
-        - Data depends on external sources (EPO, USPTO) which may be incorrect or outdated
-        
-        NOT LEGAL ADVICE:
-        - This service does NOT constitute legal advice
-        - Do NOT rely solely on this API for critical patent decisions
-        - Always consult a qualified patent attorney for legal matters
-        
-        LIMITATION OF LIABILITY:
-        - We are not liable for any damages arising from use of this API
-        - Users assume all risks associated with using this service
-        
-        VERIFICATION REQUIRED:
-        - Always verify critical patent information with official patent offices:
-          * EPO: https://www.epo.org
-          * USPTO: https://www.uspto.gov
-        
-        By using this API, you acknowledge and agree to these terms.
-        """,
-        "last_updated": "2025-11-13",
-        "contact": "support@yourservice.com"
+            "patent_status": "/api/v1/status?patent=EP1234567",
+            "analytics": "/api/v1/stats/overview"
+        }
     }
 
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(
-        "app.main:app",
-        host=settings.api_host,
-        port=settings.api_port,
-        reload=settings.debug
-    )
+    uvicorn.run("app.main:app", host=settings.api_host, port=settings.api_port, reload=True)
