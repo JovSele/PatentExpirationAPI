@@ -86,14 +86,14 @@ GET /api/v1/status?patent=EP1234567
 **Response:**
 ```json
 {
-  "patent": "EP1234567",
-  "status": "expired",
+  "patent_number": "EP1234567",
+  "status": "Granted",
   "expiry_date": "2021-11-04",
-  "jurisdictions": ["EP", "DE", "FR"],
-  "lapse_reason": "fee not paid",
+  "jurisdictions": {"primary": "EP"},
+  "lapse_reason": null,
   "source": "EPO",
-  "last_update": "2025-11-11T10:30:00Z",
-  "disclaimer": "For informational purposes only. Not legal advice."
+  "last_fetched": "2025-11-11T10:30:00Z",
+  "cache_hit": false
 }
 ```
 

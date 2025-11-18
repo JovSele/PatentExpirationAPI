@@ -44,3 +44,8 @@ psql -U patent_user -d patent_db -c "DELETE FROM patent_cache WHERE patent_numbe
 
 * funkcny kod pre lens.org + EPO - v ramci celko projektu
 * funkcny len python kod pre overenie v EPO test_EPO.py - nutne zahrnut do projektu
+
+
+Spôsob 1: Stromová štruktúra (najrýchlejší)
+bash# Ukáž mi štruktúru projektu
+tree -I 'venv|__pycache__|*.pyc|.git' -L 3
