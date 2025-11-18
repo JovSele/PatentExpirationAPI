@@ -33,9 +33,10 @@ class Settings(BaseSettings):
     lens_base_url: str = "https://api.lens.org/patent/search"
     lens_rate_limit_per_minute: int = 10
     
-    # USPTO API
+
+    # USPTO PatentsView API
     uspto_api_key: str = ""
-    uspto_base_url: str = "https://developer.uspto.gov/ds-api"
+    uspto_base_url: str = "https://search.patentsview.org/api/v1"
     
     # Cache Settings
     cache_ttl_days: int = 30

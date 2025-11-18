@@ -81,18 +81,26 @@ class PatentService:
         if patent_number.startswith("EP"):
             # European patent - try EPO first, then Lens
             patent_data = await self._try_epo(patent_number)
-            if not patent_data:
-                patent_data = await self._try_lens(patent_number)
+
+            # LENS FALLBACK - DISABLED (EPO je dostatočný)
+            # if not patent_data:
+            #     patent_data = await self._try_lens(patent_number)
                     
         elif patent_number.startswith("US"):
             # US patent - try USPTO first, then Lens
             patent_data = await self._try_uspto(patent_number)
-            if not patent_data:
-                patent_data = await self._try_lens(patent_number)
+
+            # LENS FALLBACK - DISABLED (EPO je dostatočný) 
+            # if not patent_data:
+            #     patent_data = await self._try_lens(patent_number)
 
         else:
-            # Unknown jurisdiction - try Lens as universal source
-            patent_data = await self._try_lens(patent_number)
+            # Unknown jurisdiction - no fallback
+            logger.warning(f"Unsupported jurisdiction for {patent_number}")
+            patent_data = None
+
+            # LENS FALLBACK - DISABLED
+            # patent_data = await self._try_lens(patent_number)
         
         # Step 3: Save to cache if found
         if patent_data:

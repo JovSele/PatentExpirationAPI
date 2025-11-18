@@ -1,101 +1,108 @@
 """
-USPTO API integration.
-Handles patent data retrieval from US Patent Office.
+USPTO PatentsView API Integration
+https://search.patentsview.org/
 """
 
 import httpx
-from typing import Dict, Any
+import logging
+from typing import Optional, Dict, Any
 from datetime import datetime
-from tenacity import retry, stop_after_attempt, wait_exponential
 from app.config import settings
+
+logger = logging.getLogger(__name__)
 
 
 class USPTOService:
-    """Service for interacting with USPTO API."""
+    """Service for fetching patent data from USPTO PatentsView API."""
     
     def __init__(self):
-        self.base_url = settings.uspto_base_url
         self.api_key = settings.uspto_api_key
+        self.base_url = "https://search.patentsview.org/api/v1/patent/"
     
-    @retry(
-        stop=stop_after_attempt(settings.max_retries),
-        wait=wait_exponential(multiplier=1, min=2, max=10)
-    )
-    async def get_patent_status(self, patent_number: str) -> Dict[str, Any]:
+    async def get_patent_status(self, patent_number: str) -> Optional[Dict[str, Any]]:
         """
-        Fetch patent status from USPTO API.
+        Fetch patent data from USPTO PatentsView API.
         
         Args:
-            patent_number: US Patent number (e.g., US7654321)
+            patent_number: US patent number (e.g., US7654321)
             
         Returns:
-            Dict with normalized patent data
+            Normalized patent data dict or None
         """
-        # Extract numeric part from patent number
-        # US7654321 -> 7654321
-        patent_id = patent_number.replace("US", "").strip()
-        
-        # Construct API endpoint
-        # Example: /patent/application?searchText=7654321
-        endpoint = f"{self.base_url}/patent/application"
-        
-        params = {
-            "searchText": patent_id
-        }
-        
-        headers = {}
-        if self.api_key:
-            headers["X-Api-Key"] = self.api_key
-        
-        async with httpx.AsyncClient(timeout=settings.request_timeout) as client:
-            response = await client.get(endpoint, params=params, headers=headers)
-            response.raise_for_status()
+        try:
+            # Remove US prefix
+            clean_number = patent_number.replace("US", "").strip()
             
-            data = response.json()
+            # PatentsView API request body
+            payload = {
+                "q": {"patent_id": clean_number},
+                "f": [
+                    "patent_id",
+                    "patent_date",
+                    "patent_title",
+                    "application"
+                ],
+                "o": {"size": 1}
+            }
             
-            # Parse and normalize response
-            return await self._parse_uspto_response(patent_number, data)
-    
-    async def _parse_uspto_response(
-        self, 
-        patent_number: str, 
-        raw_data: Dict[str, Any]
-    ) -> Dict[str, Any]:
-        """
-        Parse USPTO API response into normalized format.
-        
-        USPTO API structure is different from EPO, need to extract:
-        - Patent status
-        - Expiry date
-        - Maintenance fees status
-        """
-        # TODO: Implement proper USPTO response parsing
-        # USPTO has different data structure than EPO
-        
-        # Placeholder implementation
-        normalized = {
-            "patent": patent_number,
-            "status": "active",  # TODO: Parse from raw_data
-            "expiry_date": None,  # TODO: Parse from raw_data
-            "jurisdictions": ["US"],
-            "lapse_reason": None,  # TODO: Check maintenance fees
-            "source": "USPTO",
-            "raw_data": raw_data,
-            "last_update": datetime.now().isoformat()
-        }
-        
-        return normalized
-    
-    async def check_maintenance_fees(self, patent_number: str) -> Dict[str, Any]:
-        """
-        Check maintenance fee status for US patents.
-        Important for determining if patent has lapsed.
-        """
-        # TODO: Implement maintenance fee checking
-        # US patents require maintenance fees at 3.5, 7.5, and 11.5 years
-        
-        return {
-            "patent": patent_number,
-            "fees_paid": True,  # Placeholder
-            "next_due_date": None
-        }
+            async with httpx.AsyncClient(timeout=30.0) as client:
+                response = await client.post(
+                    self.base_url,
+                    json=payload,
+                    headers={
+                        "X-Api-Key": self.api_key,
+                        "Content-Type": "application/json"
+                    }
+                )
+                
+                if response.status_code != 200:
+                    logger.warning(f"USPTO API {response.status_code}: {response.text[:300]}")
+                    return None
+                
+                data = response.json()
+                
+                # Check for errors
+                if data.get("error"):
+                    logger.warning(f"USPTO API error for {patent_number}")
+                    return None
+                
+                # Check if patent found
+                patents = data.get("patents", [])
+                if not patents:
+                    logger.info(f"Patent {patent_number} not found in USPTO")
+                    return None
+                
+                patent = patents[0]
+                
+                # Get filing date from application
+                app_date = None
+                application = patent.get("application", [])
+                if application and len(application) > 0:
+                    app_date = application[0].get("filing_date")
+                
+                # Calculate expiration (20 years from filing)
+                expiry_date = None
+                if app_date:
+                    try:
+                        filing_date = datetime.strptime(app_date, "%Y-%m-%d")
+                        expiry_date = filing_date.replace(year=filing_date.year + 20).strftime("%Y-%m-%d")
+                    except ValueError:
+                        pass
+                
+                return {
+                    "patent_number": patent_number,
+                    "status": "Granted",
+                    "expiry_date": expiry_date,
+                    "jurisdictions": {"primary": "US"},
+                    "lapse_reason": None,
+                    "source": "USPTO",
+                    "raw_data": patent
+                }
+                
+        except Exception as e:
+            logger.error(f"USPTO error for {patent_number}: {str(e)}")
+            return None
+
+
+# Singleton instance
+uspto_service = USPTOService()
