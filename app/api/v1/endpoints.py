@@ -54,7 +54,7 @@ router = APIRouter()
     - European: EP1234567
     - US: US7654321
     """,
-    dependencies=[Depends(rate_limiter)]
+    
 )
 async def get_patent_status(
     request: Request,
