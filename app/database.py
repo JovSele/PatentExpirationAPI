@@ -34,6 +34,26 @@ def get_db():
     finally:
         db.close()
 
+# app/database.py
+
+# ... (váš existujúci kód)
+
+def is_database_connected():
+    """
+    Vytvorí a okamžite zatvorí spojenie, aby overil jeho funkčnosť.
+    """
+    try:
+        # Použijeme SessionLocal, aby sme sa pokúsili otvoriť spojenie
+        db = SessionLocal()
+        # Najjednoduchší dotaz na svete na overenie funkčnosti
+        db.execute("SELECT 1")
+        return True
+    except Exception as e:
+        print(f"Database connection error: {e}") # Print, aby sme videli chybu v logoch Renderu
+        return False
+    finally:
+        if 'db' in locals() and db:
+            db.close()
 
 def init_db():
     """

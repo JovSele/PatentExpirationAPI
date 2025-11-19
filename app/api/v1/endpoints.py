@@ -21,7 +21,8 @@ from app.schemas import (
     ErrorResponse,
     HealthCheckResponse
 )
-from app.database import get_db
+# POZOR: ZMENA IMPORTU! Pre Health Check importujeme priamo funkciu
+from app.database import get_db, check_db_connection # <--- TERAZ IMPORTUJEME AJ NOVÚ FUNKCIU
 from app.services.patent_service import PatentService
 from app.api.v1.dependencies import get_patent_service
 from app.utils.rate_limiter import rate_limiter
@@ -146,17 +147,14 @@ async def get_patent_status(
     summary="Health Check",
     description="Check API health and database connectivity"
 )
-async def health_check(db: Session = Depends(get_db)):
+# POZOR: Odstránili sme závislosť 'db: Session = Depends(get_db)'
+async def health_check(): 
     """
     Health check endpoint.
     Returns API status and version.
     """
-    # Test database connection
-    try:
-        db.execute("SELECT 1")
-        db_status = "connected"
-    except Exception:
-        db_status = "disconnected"
+    # Test databázy: Priame volanie funkcie na overenie pripojenia
+    db_status = check_db_connection() # <--- POUŽITIE NOVEJ FUNKCIE
     
     return HealthCheckResponse(
         status="healthy" if db_status == "connected" else "degraded",
@@ -178,7 +176,7 @@ def _log_request(
     try:
         # Extract headers
         api_key = request.headers.get("X-RapidAPI-Proxy-Secret") or \
-                  request.headers.get("X-RapidAPI-Key")
+             request.headers.get("X-RapidAPI-Key")
         tier = request.headers.get("X-RapidAPI-Subscription", "free")
         ip = request.client.host if request.client else None
         user_agent = request.headers.get("User-Agent")
