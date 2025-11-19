@@ -149,12 +149,8 @@ async def get_patent_status(
 )
 # POZOR: Odstránili sme závislosť 'db: Session = Depends(get_db)'
 async def health_check(): 
-    """
-    Health check endpoint.
-    Returns API status and version.
-    """
     # Test databázy: Priame volanie funkcie na overenie pripojenia
-    db_status = check_db_connection() # <--- POUŽITIE NOVEJ FUNKCIE
+    db_status = check_db_connection() # <--- Vráti 'connected' alebo 'disconnected'
     
     return HealthCheckResponse(
         status="healthy" if db_status == "connected" else "degraded",
@@ -162,7 +158,6 @@ async def health_check():
         timestamp=datetime.now().isoformat(),
         database=db_status
     )
-
 
 def _log_request(
     db: Session,

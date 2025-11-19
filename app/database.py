@@ -40,19 +40,19 @@ def get_db():
 
 def check_db_connection():
     """
-    Vytvorí a okamžite zatvorí spojenie, aby overil jeho funkčnosť.
+    Pokúsi sa otvoriť session a spustiť SELECT 1, aby overil pripojenie.
+    Vráti string 'connected' alebo 'disconnected'.
     """
+    db = None
     try:
-        # Použijeme SessionLocal, aby sme sa pokúsili otvoriť spojenie
         db = SessionLocal()
-        # Najjednoduchší dotaz na svete na overenie funkčnosti
-        db.execute("SELECT 1")
-        return True
+        db.execute("SELECT 1") 
+        return "connected" # <--- Opravené: Vráť string
     except Exception as e:
-        print(f"Database connection error: {e}") # Print, aby sme videli chybu v logoch Renderu
-        return False
+        print(f"Database connection check failed: {e}")
+        return "disconnected" # <--- Opravené: Vráť string
     finally:
-        if 'db' in locals() and db:
+        if db:
             db.close()
 
 def init_db():
