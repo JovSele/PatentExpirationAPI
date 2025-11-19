@@ -2,7 +2,7 @@
 Database connection and session management.
 """
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from app.config import settings
@@ -46,11 +46,12 @@ def check_db_connection():
     db = None
     try:
         db = SessionLocal()
-        db.execute("SELECT 1") 
-        return "connected" # <--- Opravené: Vráť string
+        # OPRAVA: Obalenie SQL stringu funkciou text() pre SQLAlchemy 2.0
+        db.execute(text("SELECT 1")) 
+        return "connected"
     except Exception as e:
         print(f"Database connection check failed: {e}")
-        return "disconnected" # <--- Opravené: Vráť string
+        return "disconnected"
     finally:
         if db:
             db.close()
