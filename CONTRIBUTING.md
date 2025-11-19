@@ -1,3 +1,4 @@
+> CONTRIBUTING.md << 'ENDOFFILE'
 # Contributing to Patent Expiration API
 
 Thank you for your interest in contributing to the Patent Expiration API! 🎉
