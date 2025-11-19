@@ -51,4 +51,6 @@ bash# Ukáž mi štruktúru projektu
 tree -I 'venv|__pycache__|*.pyc|.git' -L 3
 
 # Push - commitnut zmeny
+git add .
+git commit -m "FIX: Database connection logic and health check"
 git push origin main

@@ -38,7 +38,7 @@ def get_db():
 
 # ... (váš existujúci kód)
 
-def is_database_connected():
+def check_db_connection():
     """
     Vytvorí a okamžite zatvorí spojenie, aby overil jeho funkčnosť.
     """
