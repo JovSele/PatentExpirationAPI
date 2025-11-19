@@ -76,4 +76,16 @@ alembic/versions/*.pyc
 
 # Deployment
 render.yaml
-fly.toml
+fly.
+
+# Personal/Work files
+postup.txt
+clear_cache.py
+view_db.py
+test_EPO.py
+
+# Optional: Project planning docs (necháme ich zatiaľ)
+# COMMANDS.md
+# NEXT_STEPS.md
+# PLAN.md
+# PROJECT_SUMMARY.md

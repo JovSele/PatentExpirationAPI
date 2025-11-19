@@ -2,10 +2,16 @@ services:
   # Web Service (FastAPI)
   - type: web
     name: patent-expiration-api
-    runtime: python
+    env: python
+    region: frankfurt
     plan: free
-    buildCommand: pip install -r requirements.txt
+    branch: main
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -13,26 +19,43 @@ services:
         fromDatabase:
           name: patent-api-db
           property: connectionString
+      - key: EPO_CONSUMER_KEY
+        sync: false
+      - key: EPO_CONSUMER_SECRET
+        sync: false
+      - key: EPO_BASE_URL
+        value: https://ops.epo.org/3.2
+      - key: USPTO_API_KEY
+        sync: false
+      - key: USPTO_BASE_URL
+        value: https://search.patentsview.org/api/v1
+      - key: LENS_API_TOKEN
+        value: ""
+      - key: SECRET_KEY
+        generateValue: true
       - key: ENVIRONMENT
         value: production
       - key: DEBUG
         value: false
-      - key: EPO_CONSUMER_KEY
-        sync: false  # Set manually in Render dashboard
-      - key: EPO_CONSUMER_SECRET
-        sync: false
-      - key: USPTO_API_KEY
-        sync: false
-      - key: SECRET_KEY
-        generateValue: true
+      - key: LOG_LEVEL
+        value: INFO
+      - key: CACHE_TTL_DAYS
+        value: 30
+      - key: RATE_LIMIT_FREE
+        value: 20
+      - key: RATE_LIMIT_BASIC
+        value: 1000
+      - key: RATE_LIMIT_PRO
+        value: 10000
       - key: RAPIDAPI_PROXY_SECRET
         sync: false
-    healthCheckPath: /health
-    autoDeploy: true
+      - key: CORS_ORIGINS
+        value: '["*"]'
 
 databases:
   # PostgreSQL Database
   - name: patent-api-db
     plan: free
-    databaseName: patent_api
+    region: frankfurt
+    databaseName: patent_db
     user: patent_user
