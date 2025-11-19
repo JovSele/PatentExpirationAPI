@@ -49,3 +49,6 @@ psql -U patent_user -d patent_db -c "DELETE FROM patent_cache WHERE patent_numbe
 Spôsob 1: Stromová štruktúra (najrýchlejší)
 bash# Ukáž mi štruktúru projektu
 tree -I 'venv|__pycache__|*.pyc|.git' -L 3
+
+# Push - commitnut zmeny
+git push origin main

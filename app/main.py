@@ -10,7 +10,10 @@ import time
 
 from app.config import settings
 from app.database import init_db
-from app.api.v1 import endpoints, analytics
+# STARÉ (PROBLÉMOVÉ) IMPORTY: from app.api.v1 import endpoints, analytics 
+from app.api.v1.endpoints import router as endpoints_router # NOVÉ SPRÁVNE IMPORTY (Musia byť definované takto v app/api/v1/__init__.py)
+from app.api.v1.analytics import router as analytics_router # NOVÉ SPRÁVNE IMPORTY (Musia byť definované takto v app/api/v1/__init__.py)
+
 from app.middleware.advanced_rate_limiter import api_key_rate_limiter
 from app.exceptions import RateLimitExceededException
 
@@ -124,9 +127,13 @@ async def not_found_handler(request: Request, exc):
     )
 
 
+# Include routers (Použite nové názvy premenných)
+app.include_router(endpoints_router, prefix="/api/v1", tags=["Patents"])
+app.include_router(analytics_router, prefix="/api/v1", tags=["Analytics"])
+
 # Include routers
-app.include_router(endpoints.router, prefix="/api/v1", tags=["Patents"])
-app.include_router(analytics.router, prefix="/api/v1", tags=["Analytics"])
+# app.include_router(endpoints.router, prefix="/api/v1", tags=["Patents"])
+# app.include_router(analytics.router, prefix="/api/v1", tags=["Analytics"])
 
 
 # Root endpoint
