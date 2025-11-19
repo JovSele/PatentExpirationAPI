@@ -25,7 +25,6 @@ from app.schemas import (
 from app.database import get_db, check_db_connection # <--- TERAZ IMPORTUJEME AJ NOVÚ FUNKCIU
 from app.services.patent_service import PatentService
 from app.api.v1.dependencies import get_patent_service
-from app.utils.rate_limiter import rate_limiter
 from app.config import settings
 from app.models import RequestLog
 
